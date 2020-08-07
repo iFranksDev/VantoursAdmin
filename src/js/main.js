@@ -280,14 +280,17 @@ window.onload = function() {
 const imagePreview = document.getElementById("imagePreview");
 function chooseFile(e){
   file = e.target.files[0];
+
   saveFile();
   
 }
 
 function saveFile(){
-  firebase.storage().ref(taskForm["task-title"].value+'.jpg').put(file).then(function(){
+  var input = document.getElementById('fileSelected');
+  console.log(input.files.item(0).name);
+  firebase.storage().ref(input.files.item(0).name).put(file).then(function(){
     console.log('succesful upload')
-    firebase.storage().ref(taskForm["task-title"].value +'.jpg').getDownloadURL().then(imgURL =>{   
+    firebase.storage().ref(input.files.item(0).name).getDownloadURL().then(imgURL =>{   
       console.log(imgURL); 
       img.src = imgURL;   
       document.getElementById("task-photo").value = imgURL;
