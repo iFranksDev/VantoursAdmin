@@ -5,11 +5,12 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
 
   <title>Admin</title>
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 </head>
 
@@ -17,43 +18,37 @@
   <!-- NAVBAR -->
   <div class="navbar-fixed">
     <nav class="white" role="navigation">
-      <div class="center">
-        <a id="logo-container" href="/" style="margin-top: 6px;" class="brand-logo">
-          <img id="logo-vntrs" src="../img/SVG/webnav1.svg" height="40" alt="vntrs logo">
-        </a>
-      </div>
-      <div class="right">
-        <button class=" btn-small waves-effect waves-light red" onclick="logOut()">LogOut</button>
-      </div>
+      <a id="logo-container" href="/" style="margin-top: 6px;" class="brand-logo center">
+        <img id="logo-vntrs" src="../img/SVG/webnav1.svg" height="40" alt="vntrs logo">
+      </a>
+      <ul id="nav-mobile" class="right">
+        <li><a class=" btn-small waves-effect waves-light blue darken-4" onclick="logOut()">Logout</a></li>
+      </ul>
     </nav>
   </div>
   <!-- NAVBAR -->
 
-
   <!-- FLOATING BUTTON -->
   <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
+    <a href="https://vantours.mx/#/tours" class="btn-floating btn-large" style="background-color: #0b4c7c;">
       <i class="large material-icons">navigation</i>
     </a>
   </div>
   <!-- FLOATING BUTTON -->
 
-
-
-
   <!-- NEW POST -->
 
   <div class="row">
 
-    <div class="col s12 m6 l6">
+    <div class="col s12 m10 l6 offset-m1">
       <!--div class="gallery">
                 <div class="container"-->
-      <div class="card z-depth-5">
+      <div class="card z-depth-4">
         <div class="card-image">
-          <img src="../img/SVG/webv2.svg">
+          <img style="padding: 10px 2rem;" src="../img/SVG/webv2.svg">
         </div>
         <div class="card-content">
-          <blockquote>
+          <blockquote style="border-color: #e65100;">
             <span class="card-title grey-text text-darken-4">Administrador de Publicaciones</span>
           </blockquote>
           <ul class="collapsible" id="postsCreate">
@@ -65,43 +60,40 @@
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s6">
-                          <input type="text" id="task-title" class="validate" placeholder="Titulo" autofocus required>
-                          <label for="first_name">Titulo</label>
+                          <input type="text" id="task-title" class="validate" autofocus required>
+                          <label for="task-title">Titulo</label>
                         </div>
                         <div class="input-field col s6">
-                          <input type="number" id="task-price" class="validate" placeholder="Precio" autofocus required>
+                          <input type="number" id="task-price" class="validate" required>
                           <label for="task-price">Precio</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <input type="text" id="task-description" placeholder="Descripcion" required></textarea>
+                          <input type="text" id="task-description" class="validate" required>
                           <label for="task-description">Descripcion</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <input type="text" id="task-descriptionLarge" placeholder="Descripcion Larga"
-                            required></textarea>
+                          <input type="text" id="task-descriptionLarge" required>
                           <label for="task-descriptionLarge">Descripcion Larga</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s6">
-                          <input type="text" class="datepicker" id="task-dates-1" placeholder="Fechas"
-                            required></textarea>
+                          <input type="text" class="datepicker" id="task-dates-1" required>
                           <label for="task-dates-1">Fecha Inicio</label>
                         </div>
                         <div class="input-field col s6">
-                          <input type="text" class="datepicker" id="task-dates-2" placeholder="Fechas"
-                            required></textarea>
-                          <label for="last_name">Fecha Final</label>
+                          <input type="text" class="datepicker" id="task-dates-2" required>
+                          <label for="task-dates-2">Fecha Regreso</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s6">
-                          <input type="text" id="task-photo" placeholder="Foto (Link)" required></textarea>
-                          <label for="email">Foto (Link)</label>
+                          <input type="text" id="task-photo" required>
+                          <label for="task-photo">Foto (Link)</label>
                         </div>
                         <div class="input-field col s6">
                           <div class="file-field input-field">
@@ -117,7 +109,7 @@
                       </div>
                       <img src="https://via.placeholder.com/150" id="img">
                       <br> <br>
-                      <button class="btn-floating btn-large  pulse waves-effect waves-light red"
+                      <button class="btn-floating btn-large  pulse waves-effect waves-light orange darken-4"
                         onclick="setBacktoNormal()" id="btn-task-form"><i class="material-icons">add</i></button>
                     </form>
                   </div>
@@ -130,33 +122,23 @@
     </div>
     <!-- NEW POST -->
 
-
+    <!-- PRINT DB POSTS -->
+    <div id="tasks-container" class="gallery"></div>
     <!-- PRINT DB POSTS -->
 
-    <div class="row">
-      <div id="tasks-container" class="gallery"></div>
-    </div>
-
-    <!-- PRINT DB POSTS -->
+  </div>
 
 
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+
+  <script src="../js/firebase.js"></script>
+  <script src="../js/main.js"></script>
 
 
-
-
-
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script src="../js/firebase.js"></script>
-    <script src="../js/main.js"></script>
-
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 
 </html>

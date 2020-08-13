@@ -2,57 +2,53 @@
 
 (function(){*/
     //let img = document.getElementById('img');
-    var firebase = app_fireBase;
-    var uid = null;
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          uid = user.uid;
-          //console.log(user.uid);
-        }else{
-            uid = null;
-            window.location.replace("login.html");
-        }
-        
-      });
-      function logOut(){
-          firebase.auth().signOut();
-      }
-      this.logOut = logOut;
+var firebase = app_fireBase;
+var uid = null;
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      uid = user.uid;
+      //console.log(user.uid);
+    }else{
+        uid = null;
+        window.location.replace("login.html");
+    }   
+});
+function logOut(){
+    firebase.auth().signOut();
+}
+this.logOut = logOut;
 
-      ///////////////////////////////////////////Materialize///////////////////////////////////////////
-window.onload = function() {
-    /* Add your logic here */
-  const collapsable = document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    //var instances = M.Collapsible.init(elems, options);
-  });
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, options);
-  });
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.chips');
-    var instances = M.Chips.init(elems, options);
-  });
+///////////////////////////////////////////Materialize///////////////////////////////////////////
+/* Add your logic here */
+document.addEventListener('DOMContentLoaded', function() {
+  var collapsibles = document.querySelectorAll('.collapsible');
+  var instances_collapsible = M.Collapsible.init(collapsibles);
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.fixed-action-btn');
-    var instances = M.FloatingActionButton.init(elems, options);
-  });
+  var modal = document.querySelectorAll('.modal');
+  var instances_modal = M.Modal.init(modal);
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.datepicker');
-    var instances = M.Datepicker.init(elems, options);
-  });
+  var chips = document.querySelectorAll('.chips');
+  var instances_chips = M.Chips.init(chips);
 
- 
-  M.AutoInit();
-  
-  }
-  ///////////////////////////////////////////Materialize///////////////////////////////////////////
+  var fab = document.querySelectorAll('.fixed-action-btn');
+  var instances_fab = M.FloatingActionButton.init(fab);
+
+  var datepicker = document.querySelectorAll('.datepicker');
+  var instances_dp = M.Datepicker.init(datepicker, {
+    defaultDate: new Date(),
+    minDate: new Date(),
+    i18n: { //Language
+      cancel: "Cancelar",
+      months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+      monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+      weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+      weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+      weekdaysAbbrev: ["D","L", "M", "M", "J", "V", "S"]
+    }
+  });
+});
+///////////////////////////////////////////Materialize///////////////////////////////////////////
   
   
   const db = firebase.firestore();
@@ -107,69 +103,63 @@ window.onload = function() {
         
        
         tasksContainer.innerHTML += 
-  `<div class="col s12 m6 l3">
-    <div class="card z-depth-4" align="right">
-    <div class="card-image" style="
-    width: 100%;
-    height: 400px;
-    background-image: url('${task.photo}');
-    background-size: cover;
-    
-    >
+    `<div class="col s10 m8 l3 offset-s1 offset-m2" style="margin-top: 1.2rem;">
+      <div class="card z-depth-4" align="right" style="margin-bottom: 0.5rem;">
+        <div class="card-image" style="
+        width: 100%;
+        height: 400px;
+        background-image: url('${task.photo}');
+        background-size: cover;" >
 
-    <!--img class="materialboxed" src="${task.photo}" id="img"-->
+          <!--img class="materialboxed" src="${task.photo}" id="img"-->
+        
+          <a class="btn-small halfway-fab orange darken-4 right">$${task.price}</a>
       
-      <a class="btn-small halfway-fab red right">$${task.price}</a>
-   
-      <br>
-      </div>
-      <div class="card-content" align="left">
-        <span class="card-title activator grey-text text-darken-4"><span class="card-title">
-        <blockquote>${task.title}</blockquote>
-        </span><i class="material-icons right">more_vert</i></span>
-        <p>${task.description}</p>
-      </div>
-      <div class="card-reveal">
-      <blockquote>
-      <span class="card-title grey-text text-darken-4">${task.title}<i class="material-icons right">close</i></span>
-      </blockquote>
-        <p>${task.descriptionLarge}</p>
-        <div class="chip">
-        Del 
-        ${task.dates1}
-        Al 
-        ${task.dates2}
-        <i class="close material-icons">close</i>
+          <br>
         </div>
-        <div class="chip">
-        $${task.price}
-        <i class="close material-icons">close</i>
+        <div class="card-content" align="left">
+          <span class="card-title activator grey-text text-darken-4"><span class="card-title">
+          <blockquote style="border-color:#0b4c7c">${task.title}</blockquote>
+          </span><i class="material-icons right">more_vert</i></span>
+          <p>${task.description}</p>
         </div>
-       </div>
-       <div class="chip" >
-       Del 
-       ${task.dates1}
-       Al 
-       ${task.dates2}
-       <i class="close material-icons">close</i>
-       </div>
+        <div class="card-reveal">
+          <blockquote>
+          <span class="card-title grey-text text-darken-4">${task.title}<i class="material-icons right">close</i></span>
+          </blockquote>
+          <p>${task.descriptionLarge}</p>
+          <div class="chip">
+            De
+            ${task.dates1}
+            hasta
+            ${task.dates2}
+          </div>
+          <div class="chip">
+            $${task.price}
+          </div>
+        </div>
+        <div class="chip" >
+          De 
+          ${task.dates1}
+          hasta 
+          ${task.dates2}
+        </div>
       </div>
+      
       <div>
-        <button class=" btn-delete waves-effect waves-light btn" data-id="${doc.id}" style="background-color:white; color:black">
-          🗑 Borrar
+        <button class="btn-delete white orange-text text-darken-4 waves-effect waves-light btn" data-id="${doc.id}">
+          <i class="material-icons">delete_forever</i>
+          Borrar
         </button>
-        <button class=" btn-edit waves-effect waves-light btn" data-id="${doc.id}" onclick="scrollToTop()" style="background-color:white; color:black">
-          🖉 Editar
+        <button class="btn-edit white blue-text text-darken-4 waves-effect waves-light btn" data-id="${doc.id}" onclick="scrollToTop()">
+          <i class="material-icons">edit</i>  
+          Editar
         </button>
-        </div> 
-    </div>
-  </div>
-  </div>
-             
+      </div> 
+
+    </div>          
+    `;
       
-      `;
-      
-      M.AutoInit();
       });
   
   
@@ -182,7 +172,8 @@ window.onload = function() {
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
           try {
-            await deleteTask(e.target.dataset.id);
+            if(confirm("El tour se eliminará por completo, ¿Desea continuar?"))
+              await deleteTask(e.target.dataset.id);
           } catch (error) {
             console.log(error);
           }
