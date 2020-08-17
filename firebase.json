@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "vantoursadministrador",
     "public": "src",
     "ignore": [
       "firebase.json",
