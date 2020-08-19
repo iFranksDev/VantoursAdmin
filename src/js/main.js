@@ -105,15 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
         tasksContainer.innerHTML += 
     `<div class="col s10 m8 l3 offset-s1 offset-m2" style="margin-top: 1.2rem;">
       <div class="card z-depth-4" align="right" style="margin-bottom: 0.5rem;">
-        <div class="card-image" style="
-        width: 100%;
-        height: 400px;
-        background-image: url('${task.photo}');
-        background-size: cover;" >
+        <div class="card-image">
 
-          <!--img class="materialboxed" src="${task.photo}" id="img"-->
+          <img class="materialboxed" src="${task.photo}">
         
-          <a class="btn-small halfway-fab orange darken-4 right">$${task.price}</a>
+          <a class="btn-small halfway-fab orange darken-4" style="
+            position:absolute;
+            top:0;
+            right:0; ">$${task.price}</a>
       
           <br>
         </div>
@@ -202,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
             taskForm["task-photo"].value = task.photo;
             ///////////////////////////////////////////////////////////
   
+            document.getElementById("img").src = task.photo;
+            document.getElementById("btn-cancelar").style = "display:block;"
             editStatus = true;
             id = doc.id;
             taskForm["btn-task-form"].innerText = "Save";
@@ -253,8 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         M.toast({html: 'Actualizado!'});
       }
   
-      taskForm.reset();
-      title.focus();
+      setBacktoNormal();
     } catch (error) {
       console.log(error);
     }
@@ -293,7 +293,15 @@ function saveFile(){
 }
 
 function setBacktoNormal(){
+  taskForm.reset();
+  taskForm['btn-task-form'].innerHTML = '<i class="material-icons">add</i>';
   img.src = "https://via.placeholder.com/150";
+}
+
+function cancelarEdicion(){
+  setBacktoNormal();
+  editStatus = false;
+  document.getElementById("btn-cancelar").style = "display:none;"
 }
 
 
